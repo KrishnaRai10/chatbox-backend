@@ -11,6 +11,7 @@ class UserStatus extends Model
     use HasFactory;
     use HasUuids;
     public $incrementing = false;
+    public $timestamps = false;
     protected $fillable = ['user_id', 'room_id', 'status', 'last_active_at'];
 
     public function userProfile()

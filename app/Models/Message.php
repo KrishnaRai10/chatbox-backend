@@ -11,8 +11,7 @@ class Message extends Model
     use HasFactory;//to create fake or sample data
     use HasUuids;
 
-    protected $fillable = ['user_id', 'room_id', 'type', 'content'];
-
+    protected $fillable = ['user_id', 'room_id', 'type', 'content','emotion'];
     public function userProfile()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

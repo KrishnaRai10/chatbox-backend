@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignUuid('room_id')->constrained('rooms')->onDelete('cascade');
+            $table->unsignedInteger('emotion')->default(0);
             $table->string('type', 20); // text, voice, photo, emoji
             $table->text('content');
             $table->timestamps();
