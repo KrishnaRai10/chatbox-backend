@@ -18,7 +18,6 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'id' =>  Str::uuid(),
-                'name' => 'John Doe',
                 'username' => 'johndoe',
                 'email' => 'john.doe@example.com',
                 'avatar' => '/assets/images/user1.jpg',
@@ -31,7 +30,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'Jane Smith',
                 'username' => 'janesmith',
                 'email' => 'jane.smith@example.com',
                 'avatar' => 'avatars/jane.jpg',
@@ -44,7 +42,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'Michael Brown',
                 'username' => 'michaelbrown',
                 'email' => 'michael.brown@example.com',
                 'avatar' => null,
@@ -57,7 +54,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'Emily Davis',
                 'username' => 'emilydavis',
                 'email' => 'emily.davis@example.com',
                 'avatar' => 'avatars/emily.jpg',
@@ -70,7 +66,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'William Johnson',
                 'username' => 'williamj',
                 'email' => 'william.johnson@example.com',
                 'avatar' => null,
@@ -83,7 +78,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'Sarah Wilson',
                 'username' => 'sarahwilson',
                 'email' => 'sarah.wilson@example.com',
                 'avatar' => 'avatars/sarah.jpg',
@@ -96,7 +90,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'David Lee',
                 'username' => 'davidlee',
                 'email' => 'david.lee@example.com',
                 'avatar' => null,
@@ -109,7 +102,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'Lisa Anderson',
                 'username' => 'lisaanderson',
                 'email' => 'lisa.anderson@example.com',
                 'avatar' => 'avatars/lisa.jpg',
@@ -122,7 +114,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'Thomas Clark',
                 'username' => 'thomasclark',
                 'email' => 'thomas.clark@example.com',
                 'avatar' => null,
@@ -135,7 +126,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id' =>  Str::uuid(),
-                'name' => 'Emma Taylor',
                 'username' => 'emmataylor',
                 'email' => 'emma.taylor@example.com',
                 'avatar' => 'avatars/emma.jpg',

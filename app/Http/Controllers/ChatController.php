@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ChatMessageEvent;
+use App\Events\TypingEvent;
 use App\Events\UserStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
@@ -45,8 +46,6 @@ class ChatController extends Controller
             'type'=> 'nullable|string|in:text,voice,photo,emoji',
         ]);
     $emotion = EmotionDetector::detect($validated['message'] ?? '');
-    \Log::info('Detected emotion: ' . $emotion);
-        // dd($emotion); // Debugging line to check emotion detection
         // Ensure at least one of message or file is provided
         if (!$request->has('message') && !$request->hasFile('file')) {
             return response()->json(['error' => 'Message or file is required'], 422);
@@ -85,6 +84,19 @@ class ChatController extends Controller
 
         return response()->json(['message'=>"Message sent successfully"], 200);
     }
+
+    public function typing(Request $request): JsonResponse
+{
+    $validated = $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'room_id' => 'required|exists:rooms,id',
+    ]);
+
+    event(new TypingEvent($validated['user_id'], $validated['room_id']));
+
+    return response()->json(['status' => 'Typing broadcasted']);
+}
+
        private function updateUserStatus(string $user_id, string $room_id, string $status): void
     {
         UserStatus::updateOrCreate(
