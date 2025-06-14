@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\ChatMessageEvent;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChatController;
@@ -14,6 +15,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::post('register', [RegisteredUserController::class, 'store']);
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::get('getMessage',[ChatController::class,'getMessages'])
-    ->name('getMessage');
+Route::get('get-message',[ChatController::class,'getMessages'])
+    ->name('get-message');
 Route::post('sendMessage',[ChatController::class,'sendMessage']);

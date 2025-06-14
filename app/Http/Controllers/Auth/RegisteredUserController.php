@@ -25,11 +25,13 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+    $avatar = 'https://ui-avatars.com/api/?name=' . urlencode($request->username) . '&background=random&color=fff';
 
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->string('password')),
+            'avatar'=> $avatar,
         ]);
 
         event(new Registered($user));
@@ -41,6 +43,7 @@ class RegisteredUserController extends Controller
         return response()->json([
             'message' => 'User registered successfully.',
             'access_token' => $token,
+            'user'=>$user,
             'token_type' => 'Bearer',
         ], 201);
     }

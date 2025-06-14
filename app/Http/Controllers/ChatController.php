@@ -11,6 +11,7 @@ use App\Models\UserStatus;
 use App\Services\EmotionDetector;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ChatController extends Controller
@@ -30,7 +31,7 @@ class ChatController extends Controller
                 if (in_array($message->type, ['photo', 'voice'])) {
                     $message->content = Storage::url($message->content);
                 }
-                $message->display_name = $message->userProfile->display_name ?? $message->username;
+                $message->display_name = $message->userProfile->display_name ?? $message->userProfile->username;
                 return $message;
             });
 
@@ -71,6 +72,9 @@ class ChatController extends Controller
             'content' => $content,
             'emotion' => $emotion,
         ]);
+
+Log::info('🎯 ChatMessageEvent dispatched');
+
 
         event(new ChatMessageEvent(
             $validated['user_id'],
