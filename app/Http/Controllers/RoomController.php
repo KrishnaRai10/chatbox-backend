@@ -18,16 +18,16 @@ class RoomController extends Controller
     // Store a new room
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:50|unique:rooms',
         ]);
 
         $room = Room::create([
             'id' => Str::uuid(),
-            'name' => $request->name,
+            'name' => $validated['name'],
         ]);
 
-       return response()->json(['status' => 'Room created', 'room' => $room], 201);
+       return response()->json(['message' => 'Room created successfully', 'room' => $room], 201);
     }
 
     // Show a specific room

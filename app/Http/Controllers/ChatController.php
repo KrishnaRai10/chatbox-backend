@@ -7,6 +7,7 @@ use App\Events\TypingEvent;
 use App\Events\UserStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\Models\User;
 use App\Models\UserStatus;
 use App\Services\EmotionDetector;
 use Illuminate\Http\JsonResponse;
@@ -73,9 +74,6 @@ class ChatController extends Controller
             'emotion' => $emotion,
         ]);
 
-Log::info('🎯 ChatMessageEvent dispatched');
-
-
         event(new ChatMessageEvent(
             $validated['user_id'],
             $validated['room_id'],
@@ -89,16 +87,18 @@ Log::info('🎯 ChatMessageEvent dispatched');
         return response()->json(['message'=>"Message sent successfully"], 200);
     }
 
-    public function typing(Request $request): JsonResponse
+public function typing(Request $request): JsonResponse
 {
-    $validated = $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'room_id' => 'required|exists:rooms,id',
-    ]);
+$validated = $request->validate([
+    'user_id' => 'required|exists:users,id',
+    'room_id' => 'required|exists:rooms,id',
+]);
+$user=User::find($validated['user_id']);
 
-    event(new TypingEvent($validated['user_id'], $validated['room_id']));
 
-    return response()->json(['status' => 'Typing broadcasted']);
+event(new TypingEvent($validated['user_id'], $validated['room_id'],$user->avatar));
+
+    return response()->json(['message' => 'Typing broadcasted']);
 }
 
        private function updateUserStatus(string $user_id, string $room_id, string $status): void
